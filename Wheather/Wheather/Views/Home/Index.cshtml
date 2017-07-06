@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="main">
+    <h1>Smile</h1>
+    <h2>Whatever the weather is, the more important that you have in your heart</h2>
+</div>
+
+<div class="select">
+    <p>Select a city</p>
+    <select name="citySelect">
+        <option placeholder="-select city-">-select city-</option>
+        <option value="Kiev">Kiev</option>
+        <option value="Lviv">Lviv</option>
+        <option value="Kharkiv">Kharkiv</option>
+        <option value="Dnipropetrovsk">Dnipropetrovsk</option>
+        <option value="Odessa">Odessa</option>
+    </select>
+
+    <p>Or write another:</p>
+    <input id="cityText" type="text" name="city" placeholder="City" />
+</div>
+
+<div class="radio">
+    <p>Choose how much perid you want to see the weather</p>
+    <form>
+ 
+            <input type="radio" name="radio" value="1" checked>now <br>
+            <input type="radio" name="radio" value="3"> the next three days<br>
+            <input type="radio" name="radio" value="7"> the next seven days
+       
+</form>
+</div>
+
+<div>
+    <input id="but" type="submit" value="Find out the weather" />
+</div>
+
+<div id="infa"></div>
+
+<script src="~/Scripts/JavaScript.js">
+</script>
