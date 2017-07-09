@@ -42,3 +42,26 @@ textarea {
     padding: 1%;
     margin: 1%;
 }
+
+.weather-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background: transparent;
+}
+
+.weather h2, .weather h5, .weather-list h2 {
+    text-align: center;
+}
+
+.weather img {
+    height: 50px;
+    width: 50px;
+    align-self: center;
+}

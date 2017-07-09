@@ -6,44 +6,42 @@ using System.Web.Mvc;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Wheather.Models;
+using Wheather.Models.Now;
+using Wheather.Models.Seven;
+using Wheather.Models.Three;
+using Wheather.Services.Interfaces;
 
 namespace Wheather.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        private readonly IWeatherService _weatherService;
+
+        public HomeController(IWeatherService weatherService)
+        {
+            _weatherService = weatherService;
+        }
+
+        
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
-        public JsonResult GetWeatherNow(string city)
+        public ActionResult GetWeatherNow(string city)
         {
-            using (var client = new HttpClient())
-            {
-                var responce = client.GetStringAsync($"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric").Result;
-                var res=JsonConvert.DeserializeObject<Now>(responce);
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult GetWeatherThreeDays(string city)
-        {
-            using (var client = new HttpClient())
-            {
-                var responce = client.GetStringAsync($"http://api.openweathermap.org/data/2.5/forecast?q={city}&cnt=3&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric").Result;
-                var res = JsonConvert.DeserializeObject<Three>(responce);
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
-        }
-        public JsonResult GetWeatherSevenDays(string city)
-        {
-            using (var client = new HttpClient())
-            {
-                var responce = client.GetStringAsync($"http://api.openweathermap.org/data/2.5/forecast?q={city}&cnt=7&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric").Result;
-                var res = JsonConvert.DeserializeObject<Seven>(responce);
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
+            return PartialView("Present", _weatherService.GetPresentWeather(city));
         }
 
+        public ActionResult GetWeatherThreeDays(string city)
+        {
+            return PartialView("ThreeDays", _weatherService.GetWeatherForThreeDays(city));
+        }
+
+        public ActionResult GetWeatherSevenDays(string city)
+        {
+            return PartialView("SevenDays", _weatherService.GetWeatherSevenDays(city));
+        }
     }
 }

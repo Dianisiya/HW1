@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Wheather.Models
+﻿namespace Wheather.Models
 {
     public class Now
     {
-        public Coord1 coord { get; set; }
-        public Weather1[] weather { get; set; }
+        public Coord1 Coord { get; set; }
+        public Weather1[] Weather { get; set; }
         public string _base { get; set; }
-        public Main1 main { get; set; }
+        public Main1 Main { get; set; }
         public int visibility { get; set; }
         public Wind1 wind { get; set; }
         public Clouds1 clouds { get; set; }

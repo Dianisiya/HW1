@@ -43,6 +43,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LightInject, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.5.0.0\lib\net45\LightInject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightInject.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.Mvc.2.0.0\lib\net45\LightInject.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightInject.Web, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.Web.2.0.0\lib\net45\LightInject.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -142,10 +154,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Now.cs" />
-    <Compile Include="Models\Seven.cs" />
-    <Compile Include="Models\Three.cs" />
+    <Compile Include="Models\Now\Now.cs" />
+    <Compile Include="Models\Seven\Seven.cs" />
+    <Compile Include="Models\Three\Three.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Implementations\RequestService.cs" />
+    <Compile Include="Services\Implementations\WeatherService.cs" />
+    <Compile Include="Services\Interfaces\IRequestService.cs" />
+    <Compile Include="Services\Interfaces\IWeatherService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -161,6 +177,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Present.cshtml" />
+    <Content Include="Views\Home\ThreeDays.cshtml" />
+    <Content Include="Views\Home\SevenDays.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
