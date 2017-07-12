@@ -1,0 +1,17 @@
+﻿@model Wheather.Models.HistoryModel
+
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="history-container">
+    @foreach (var action in Model.History)
+    {
+        <div class="history-item">
+            <h4>@action.Description</h4>
+            <h4>@action.DateTime.ToString("D")</h4>
+        </div>
+    
+    }
+</div>
+

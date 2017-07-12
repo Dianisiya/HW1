@@ -1,4 +1,4 @@
-﻿
+﻿@model Wheather.Models.IndexModel
 @{
     ViewBag.Title = "Index";
 }
@@ -14,17 +14,35 @@
         <div class="main">
             <h1>Smile</h1>
             <h2>Whatever the weather is, the more important that you have in your heart</h2>
+            @Html.ActionLink("History", "History")
+        </div>
+        
+        <div class="cities-managment">
+            <div class="add-city">
+                <h5>Add City</h5>
+                <input type="text" id="add-city"/>
+                <input type="button" id="add-city-btn" value="Add City"/>
+            </div>
+            <div class="delete-city">
+                <h5>Delete City</h5>
+                <input type="text" id="delete-city" />
+                <input type="button" id="delete-city-btn" value="Delete City"/>
+            </div>
+            <div class="update-cities">
+                <h5>Update Cities</h5>
+                <input type="text" id="update-cities" />
+                <input type="button" id="update-cities-btn" value="Update Cities"/>
+            </div>
         </div>
 
         <div class="select">
             <p>Select a city:</p>
             <select name="citySelect">
                 <option placeholder="-select city-" value="">-select city-</option>
-                <option value="Kiev">Kiev</option>
-                <option value="Lviv">Lviv</option>
-                <option value="Kharkiv">Kharkiv</option>
-                <option value="Dnipropetrovsk">Dnipropetrovsk</option>
-                <option value="Odessa">Odessa</option>
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
             </select><br />
             </div>
 

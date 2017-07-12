@@ -24,3 +24,34 @@ $("#but").click(function () {
     }
 });
 
+$("#add-city-btn").click(function() {
+    $.ajax({
+        url: "http://localhost:31657/Home/AddCity",
+        type: "POST",
+        data: { city: $("#add-city").val() },
+        success: function () {
+            location.reload();
+        }
+    });
+});
+
+$("#delete-city-btn").click(function () {
+    $.ajax({
+        url: "http://localhost:31657/Home/DeleteCity?city=" + $("#delete-city").val(),
+        type: "POST",
+        success: function () {
+            location.reload();
+        }
+    });
+});
+
+$("#update-cities-btn").click(function () {
+    $.ajax({
+        url: "http://localhost:31657/Home/UpdateCities",
+        type: "POST",
+        data: { cities: $("#update-cities").val().split(",") },
+        success: function() {
+            location.reload();
+        }
+    });
+});

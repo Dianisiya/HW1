@@ -11,6 +11,8 @@ using Wheather.Services.Interfaces;
 
 namespace Wheather
 {
+    using Wheather.Models.Db;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -23,6 +25,8 @@ namespace Wheather
 
             container.Register<IWeatherService, WeatherService>(new PerScopeLifetime());
             container.Register<IRequestService, RequestService>(new PerScopeLifetime());
+            container.Register<IActionLogger, DbActionLogger>(new PerScopeLifetime());
+            container.Register<WeatherDb>(new PerRequestLifeTime());
 
             container.EnableMvc();
         }

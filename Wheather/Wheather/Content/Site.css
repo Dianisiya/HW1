@@ -65,3 +65,24 @@ textarea {
     width: 50px;
     align-self: center;
 }
+
+.cities-managment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cities-managment > div {
+    width: 280px
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.history-container > .history-item {
+    
+}
