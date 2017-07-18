@@ -58,8 +58,8 @@
 
         public void Update(TEntity entity)
         {
-            this.dbSet.Remove(this.Get(entity.Id));
-            this.dbSet.Add(entity);
+            this.context.Entry(entity).State = EntityState.Modified;
+            this.context.SaveChanges();
         }
 
         public void Save()
