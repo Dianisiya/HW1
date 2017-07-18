@@ -11,5 +11,7 @@ namespace Wheather.Services.Interfaces
         Three GetWeatherForThreeDays(string city);
 
         Seven GetWeatherSevenDays(string city);
+
+        Seven GetWeather(string city, int days);
     }
 }

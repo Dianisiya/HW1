@@ -43,6 +43,13 @@ namespace Wheather.Services.Implementations
             }
             return _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=7");
         }
-
+        public Seven GetWeather(string city, int days)
+        {
+            if ((city == null) || (city == "") || (days<1))
+            {
+                throw new ArgumentException();
+            }
+            return _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt={days}");
+        }
     }
 }

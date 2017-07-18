@@ -26,7 +26,7 @@ namespace Wheather.Controllers
 
         private readonly IRepository<City, int> _cityRepository;
 
-        public HomeController(IWeatherService weatherService, WeatherDb db, IActionLogger actionLogger, IRepository<Action, int> actionRepository, IRepository<City, int> cityRepository)
+        public HomeController(IWeatherService weatherService, IActionLogger actionLogger, IRepository<Action, int> actionRepository, IRepository<City, int> cityRepository)
         {
             _weatherService = weatherService;
             this.actionLogger = actionLogger;
@@ -91,7 +91,7 @@ namespace Wheather.Controllers
         public ActionResult GetWeatherNow(string city)
         {
             var presentWeather = this._weatherService.GetPresentWeather(city);
-            this.actionLogger.AddAction($"User view present weather in {city}", new []{new Weather{City = presentWeather.Name, DateTime = new DateTime(1970,1,1,0,0,0).AddSeconds(presentWeather.Dt), IconNumber = presentWeather.Weather[0].Icon} });
+            this.actionLogger.AddAction($"User view present weather in {city}", new []{new Weather { City = presentWeather.Name, DateTime = new DateTime(1970,1,1,0,0,0).AddSeconds(presentWeather.Dt), IconNumber = presentWeather.Weather[0].Icon} });
             return PartialView("Present", presentWeather);
         }
 
