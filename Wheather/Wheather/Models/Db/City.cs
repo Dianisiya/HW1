@@ -4,7 +4,7 @@
 
     public class City : BaseDbEntity<int>
     {
-        public int Id { get; internal set; }
+
         public string Name { get; set; }
     }
 }

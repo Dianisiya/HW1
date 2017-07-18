@@ -5,12 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using Wheather.Models.Db;
 using Wheather.Services.Interfaces;
 
 namespace Wheather.API
 {
-    public class CityController : ApiController
+    public class CityController : Controller
     {
         private IRepository<City, int> db;
         public CityController (IRepository<City, int> db)
@@ -20,25 +21,25 @@ namespace Wheather.API
         }
 
 
-        public IEnumerable<Models.Db.City> GetCity()
+        public JsonResult GetCity()
         {
-            return db.Get();
+            return Json(db.Get(), JsonRequestBehavior.AllowGet);
         }
 
-        public Models.Db.City GetCities(int id)
+        public JsonResult GetCities(int id)
         {
             Models.Db.City cities = db.Get(id);
-            return cities;
+            return Json(cities, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public void CreateCity([FromBody] Models.Db.City city)
         {
             db.Add(city);
             db.Save();
         }
 
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public void EditCity(int id, [FromBody]Models.Db.City city)
         {
             if(id == city.Id)

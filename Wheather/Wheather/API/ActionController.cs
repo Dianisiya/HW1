@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
+using System.Web.Mvc;
 using Wheather.Models.Db;
 using Wheather.Services.Interfaces;
 
 namespace Wheather.API
 {
-    public class ActionController : ApiController
+    public class ActionController : Controller
     {
         private IRepository<Models.Db.Action, int> db;
         public ActionController(IRepository<Models.Db.Action, int> db)
@@ -17,9 +19,9 @@ namespace Wheather.API
             this.db = db;
         }
 
-        public IEnumerable<Models.Db.Action> GetHistory()
+        public JsonResult GetHistory()
         {
-            return db.Include("Result").Get();
+            return Json(db.Include("Result").Get(), JsonRequestBehavior.AllowGet);
         }
     }
 }

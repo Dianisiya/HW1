@@ -11,6 +11,6 @@
         public DateTime DateTime { get; set; }
 
         public ICollection<Weather> Result { get; set; }
-        public int Id { get; internal set; }
+
     }
 }
