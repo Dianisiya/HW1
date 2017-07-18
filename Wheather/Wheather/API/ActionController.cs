@@ -21,7 +21,12 @@ namespace Wheather.API
 
         public JsonResult GetHistory()
         {
-            return Json(db.Include("Result").Get(), JsonRequestBehavior.AllowGet);
+            var enumerable = this.db.Include("Result").Get();
+            foreach(var weather in enumerable.SelectMany(a => a.Result))
+            {
+                weather.Action = null;
+            }
+            return this.Json(enumerable, JsonRequestBehavior.AllowGet);
         }
     }
 }
