@@ -2,11 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class City
+    public class City : BaseDbEntity<int>
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         public string Name { get; set; }
     }
 }

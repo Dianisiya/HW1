@@ -10,6 +10,17 @@
         <div class="history-item">
             <h4>@action.Description</h4>
             <h4>@action.DateTime.ToString("D")</h4>
+            <div>
+            @foreach (var weather in action.Result)
+            {
+                var icon = $"http://openweathermap.org/img/w/{@weather.IconNumber}.png";
+                <div class="weather">
+                    <h2>@weather.DateTime.ToString("D")</h2>
+                    <h5>Temperature: @weather.Min - @weather.Max C</h5>
+                    <img src="@icon">
+                </div>
+            }
+            </div>
         </div>
     
     }

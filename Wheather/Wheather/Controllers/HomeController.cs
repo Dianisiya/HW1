@@ -14,20 +14,24 @@ using Wheather.Services.Interfaces;
 namespace Wheather.Controllers
 {
     using Wheather.Models.Db;
+    using Wheather.Services.Implementations;
 
     public class HomeController : Controller
     {
         private readonly IWeatherService _weatherService;
 
-        private readonly WeatherDb db;
-
         private readonly IActionLogger actionLogger;
 
-        public HomeController(IWeatherService weatherService, WeatherDb db, IActionLogger actionLogger)
+        private readonly IRepository<Action, int> _actionRepository;
+
+        private readonly IRepository<City, int> _cityRepository;
+
+        public HomeController(IWeatherService weatherService, WeatherDb db, IActionLogger actionLogger, IRepository<Action, int> actionRepository, IRepository<City, int> cityRepository)
         {
             _weatherService = weatherService;
-            this.db = db;
             this.actionLogger = actionLogger;
+            this._actionRepository = actionRepository;
+            this._cityRepository = cityRepository;
         }
 
         
@@ -35,64 +39,74 @@ namespace Wheather.Controllers
         {
             return View(new IndexModel
                             {
-                                Cities = this.db.Cities.Select(c => c.Name).ToArray()
+                                Cities = this._cityRepository.Get().Select(c => c.Name).ToArray()
                             });
         }
 
         public ActionResult History()
         {
-            return View(new HistoryModel{History = this.db.Actions.ToArray().Reverse()});
+            var enumerable = this._actionRepository.Include("Result").Get();
+            return View(new HistoryModel{History = enumerable.Reverse()});
         }
 
         [HttpPost]
         public void AddCity(string city)
         {
-            if (this.db.Cities.All(c => c.Name != city))
+            if (this._cityRepository.Get().All(c => c.Name != city))
             {
-                this.db.Cities.Add(new City { Name = city });
-                this.db.SaveChanges();
+                this._cityRepository.Add(new City { Name = city });
                 this.actionLogger.AddAction($"User add new city : {city}");
+                this._cityRepository.Save();
             }
         }
 
         [HttpPost]
         public void DeleteCity(string city)
         {
-            var _city = this.db.Cities.FirstOrDefault(c => c.Name == city);
+            var _city = this._cityRepository.Get().FirstOrDefault(c => c.Name == city);
             if (_city != null)
             {
-                this.db.Cities.Remove(_city);
-                this.db.SaveChanges();
+                this._cityRepository.Delete(_city.Id);
                 this.actionLogger.AddAction($"User delete new city : {city}");
+                this._cityRepository.Save();
             }
         }
 
         [HttpPost]
         public void UpdateCities(string[] cities)
         {
-            this.db.Cities.RemoveRange(this.db.Cities);
-            this.db.Cities.AddRange(cities.Select(c => new City { Name = c }));
-            this.db.SaveChanges();
+            foreach (var city in this._cityRepository.Get().ToArray())
+            {
+                this._cityRepository.Delete(city.Id);
+            }
+            foreach (var city in cities)
+            {
+                this._cityRepository.Add(new City { Name = city });
+            }
+            this._cityRepository.Save();
             this.actionLogger.AddAction($"User update cities. New cities : {cities.Aggregate((s, s1) => s + "," + s1)}");
         }
 
         [HttpGet]
         public ActionResult GetWeatherNow(string city)
         {
-            this.actionLogger.AddAction($"User view present weather in {city}");
-            return PartialView("Present", _weatherService.GetPresentWeather(city));
+            var presentWeather = this._weatherService.GetPresentWeather(city);
+            this.actionLogger.AddAction($"User view present weather in {city}", new []{new Weather{City = presentWeather.Name, DateTime = new DateTime(1970,1,1,0,0,0).AddSeconds(presentWeather.Dt), IconNumber = presentWeather.Weather[0].Icon} });
+            return PartialView("Present", presentWeather);
         }
 
         public ActionResult GetWeatherThreeDays(string city)
         {
-            this.actionLogger.AddAction($"User view three days weather in {city}");
-            return PartialView("ThreeDays", _weatherService.GetWeatherForThreeDays(city));
+            var weatherForThreeDays = this._weatherService.GetWeatherForThreeDays(city);
+            this.actionLogger.AddAction($"User view three days weather in {city}", weatherForThreeDays.List.Select(w => new Weather{City = weatherForThreeDays.City.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt), IconNumber = w.Weather[0].Icon}));
+            return PartialView("ThreeDays", weatherForThreeDays);
         }
 
         public ActionResult GetWeatherSevenDays(string city)
         {
-            this.actionLogger.AddAction($"User view seven days weather in {city}");
-            return PartialView("SevenDays", _weatherService.GetWeatherSevenDays(city));
+            var weatherSevenDays = this._weatherService.GetWeatherSevenDays(city);
+            this.actionLogger.AddAction($"User view three days weather in {city}", weatherSevenDays.List.Select(w => new Weather { City = weatherSevenDays.City.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt), IconNumber = w.Weather[0].Icon }));
+            return PartialView("SevenDays", weatherSevenDays);
         }
     }
 }

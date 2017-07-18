@@ -1,15 +1,15 @@
 ﻿namespace Wheather.Models.Db
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Action
+    public class Action : BaseDbEntity<int>
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         public string Description { get; set; }
 
         public DateTime DateTime { get; set; }
+
+        public ICollection<Weather> Result { get; set; }
     }
 }
