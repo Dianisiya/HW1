@@ -17,6 +17,8 @@ textarea {
     font-weight:bold;
     padding-top: 35px;
     margin-top: 15px;
+    display:flex;
+    justify-content:space-between;
 
 
 }
@@ -48,10 +50,53 @@ textarea {
     height:20%;
 }
 
+.box p{
+    text-align:center;
+    position:center;
+    top:20px;
+    color:black;
+}
+
+.box{
+    width:100%;
+    height:60px;
+    background:#acb0b7;
+    margin:30px auto;
+}
+
+.shadow
+{
+  position: relative;
+}
+.shadow:before, .shadow:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 10px;
+  left: 5px;
+  width: 50%;
+  top: 80%;
+  max-width:200px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(-3deg);
+}
+.shadow:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+
+
+
 .cities-managment {
     float:right;
     justify-content: space-between;
-    width: 40%;
+    width: 20%;
+    align-items:center;
 }
 
 .cities-managment > div {
@@ -60,9 +105,24 @@ textarea {
 
 }
 input[type="text"]{
+    border-radius:  8px;
+    text-align:center;
+    margin-bottom:5%;
+    box-shadow: inset 0 1px 0 #f4f8fb;
+<<<<<<< Updated upstream
     background-color:white;
+=======
+    background-color:aliceblue;
+>>>>>>> Stashed changes
 }
 
+input[type="button"]{
+    border-radius:8px;
+    position:relative        ;
+    height:30px;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#294d87), to(#EBFFFF));
+    margin-left:40px;
+}
 
 
 #content{
@@ -70,7 +130,7 @@ input[type="text"]{
     flex-direction: column;
     position:center;
     width:100%;
-    justify-content: space-between;
+
     margin:5%;
     align-items:center;
 }
@@ -96,6 +156,7 @@ input[type="text"]{
      font-weight:bold;
     padding: 1%;
     margin: 1%;
+    color:#01173a;
 }
 
 .weather-list {
@@ -124,6 +185,9 @@ input[type="text"]{
     width:100%;
     height:60px;
     font-weight:bold;
+    margin:3%;
+    
+    border-radius:10px;
 }
 
 
@@ -140,6 +204,10 @@ input[type="text"]{
     
 }
 
+p{
+    color:#01173a;
+}
+
 #footer{
     font-weight:bold;
     display:flex;
@@ -149,6 +217,7 @@ input[type="text"]{
 .infaAbout h4{
     font-weight:bold;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#01173a;
 }
 
 .infaAbout{

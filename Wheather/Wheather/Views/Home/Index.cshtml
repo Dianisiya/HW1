@@ -14,8 +14,10 @@
             <div class="logoName">
                 <img src="http://appvisor.ru/uploads/ios/2/12792/pogoda-live.png" alt="Weather logo" />
                 <h1>Smile</h1>
-                <p>Whatever the weather is, the more important that you have in your heart</p>
-                @Html.ActionLink("History", "History")
+                <div class="box shadow">
+                    <p>Whatever the weather is, the more important that you have in your heart...</p>
+                </div>
+                    @Html.ActionLink("History", "History")
             </div>
 
             <div class="cities-managment">
@@ -28,7 +30,7 @@
                     <input type="button" id="delete-city-btn" value="Delete City" />
                 </div>
                 <div class="update-cities">
-                    <input type="text" id="update-cities" placeholder="write new cities"/>
+                    <input type="text" id="update-cities" placeholder="cities(through a comma)"/>
                     <input type="button" id="update-cities-btn" value="Update Cities" />
                 </div>
             </div>
