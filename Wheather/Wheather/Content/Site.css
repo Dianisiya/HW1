@@ -1,14 +1,11 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-     background: -webkit-linear-gradient(#ccd5e2, #b0c5e5, #4f73af, #263f68);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background: -webkit-linear-gradient(#ccd5e2, #b0c5e5, #4f73af, #263f68);
+
     }
 
-/* Set padding to keep  from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -16,15 +13,67 @@ textarea {
     max-width: 280px;
 }
 
-.main{
+#header{
     font-weight:bold;
-    padding: 3%;
-    margin: 2%;
-    text-align:center;
-    border:   groove;
-    border-color: black;
-    border-radius:1% ;
+    padding-top: 35px;
+    margin-top: 15px;
+
+
 }
+
+.logoName{
+    width: 50%;
+    height:20%;
+    display:inline-block;
+}
+
+.logoName img{
+    float:left;
+    width:100px;
+    height:100px;
+    background: #555;
+}
+.logoName h1{
+    position:relative;
+    top:20px;
+    left:10px;
+    padding: 2%;
+}
+
+.logoName p{
+    
+    padding-top:5%;
+    display:block;
+    width:100%;
+    height:20%;
+}
+
+.cities-managment {
+    float:right;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.cities-managment > div {
+    width: 200px;
+    padding-bottom:5px;
+
+}
+input[type="text"]{
+    background-color:steelblue;
+}
+
+
+
+#content{
+    display:flex;
+    position:center;
+    width:100%;
+    justify-content: space-between;
+    margin:5%;
+    align-items:center;
+}
+
 
 .select{
     margin:2%;
@@ -65,16 +114,14 @@ textarea {
     width: 50px;
     align-self: center;
 }
-
-.cities-managment {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#but{
+    width:100%;
+    height:60px;
+    font-weight:bold;
 }
 
-.cities-managment > div {
-    width: 280px
-}
+
+
 
 .history-container {
     display: flex;
@@ -85,4 +132,24 @@ textarea {
 
 .history-container > .history-item {
     
+}
+
+#footer{
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+}
+
+.infaAbout h4{
+    font-weight:bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.infaAbout{
+    width:60%;
+}
+.contact{
+    padding:2%;
+    border:dotted;
+    border-radius:5px;
 }
