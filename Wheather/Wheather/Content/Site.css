@@ -227,4 +227,13 @@ p{
     padding:2%;
     border:dotted;
     border-radius:5px;
+    width:30%;
+}
+a{
+    color:aliceblue;
+}
+
+a.fb:hover, a.fb:active {
+    font-size: 140%;
+    color:#01173a;
 }
