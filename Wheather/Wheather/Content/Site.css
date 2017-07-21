@@ -60,13 +60,14 @@ textarea {
 
 }
 input[type="text"]{
-    background-color:steelblue;
+    background-color:white;
 }
 
 
 
 #content{
     display:flex;
+    flex-direction: column;
     position:center;
     width:100%;
     justify-content: space-between;
@@ -74,11 +75,16 @@ input[type="text"]{
     align-items:center;
 }
 
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
 
-.select{
-    margin:2%;
-    padding:2%;
-     font-weight:bold;
+.select {
+    margin: 2%;
+    padding: 2%;
+    font-weight: bold;
 }
 .text{
      font-weight:bold;

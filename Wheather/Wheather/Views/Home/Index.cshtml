@@ -37,35 +37,37 @@
 
 
         <div id="content">
-            <div class="select">
-                <p>Select a city:</p>
-                <select name="citySelect">
-                    <option placeholder="-select city-" value="">-select city-</option>
-                    @foreach (var city in Model.Cities)
-                    {
-                        <option value="@city">@city</option>
-                    }
-                </select><br />
-            </div>
+            <div class="main-content">
+                <div class="select">
+                    <p>Select a city:</p>
+                    <select name="citySelect">
+                        <option placeholder="-select city-" value="">-select city-</option>
+                        @foreach (var city in Model.Cities)
+                        {
+                            <option value="@city">@city</option>
+                        }
+                    </select><br/>
+                </div>
 
-            <div class="text">
-                <p>Or write another:</p>
-                <input id="cityText" type="text" name="city" placeholder="City" />
-            </div>
+                <div class="text">
+                    <p>Or write another:</p>
+                    <input id="cityText" type="text" name="city" placeholder="City"/>
+                </div>
 
-            <div class="radio">
-                <p>Choose how much perid you want to see the weather</p>
-                <form>
+                <div class="radio">
+                    <p>Choose how much perid you want to see the weather</p>
+                    <form>
 
-                    <input type="radio" name="radio" value="1" checked>now <br>
-                    <input type="radio" name="radio" value="3"> the next three days<br>
-                    <input type="radio" name="radio" value="7"> the next seven days
+                        <input type="radio" name="radio" value="1" checked>now <br>
+                        <input type="radio" name="radio" value="3"> the next three days<br>
+                        <input type="radio" name="radio" value="7"> the next seven days
 
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <div>
-                <input id="but" type="submit" value="Find out the weather" />
+                <div>
+                    <input id="but" type="submit" value="Find out the weather"/>
+                </div>
             </div>
 
             <div id="infa"></div>
