@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -19,7 +11,6 @@ namespace Weather.UwpApp
 {
     using System.Collections.ObjectModel;
     using System.Net.Http;
-    using System.Threading.Tasks;
 
     using Newtonsoft.Json;
 
@@ -57,18 +48,19 @@ namespace Weather.UwpApp
             }
         }
 
-        private void InitCities()
+        private async void InitCities()
         {
             this.CityCB.Items.Clear();
 
             using (var httpClient = new HttpClient())
             {
-                var value = httpClient.GetAsync("http://localhost:31657/Home/GetCities").Result;
-                var cities = JsonConvert.DeserializeObject<IEnumerable<string>>(value.Content.ReadAsStringAsync().Result);
+                var value = await httpClient.GetAsync("http://localhost:31657/Home/GetCities");
+                var cities = JsonConvert.DeserializeObject<IEnumerable<string>>(await value.Content.ReadAsStringAsync());
                 foreach (var city in cities)
                 {
                     this.CityCB.Items.Add(city);
                 }
+                this.CityCB.SelectedItem = "Lviv";
             }
         }
 
@@ -92,8 +84,8 @@ namespace Weather.UwpApp
                                                  City = now.Name,
                                                  Date = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(now.Dt).Date.ToString("D"),
                                                  Icon = $"http://openweathermap.org/img/w/{now.Weather[0].Icon}.png",
-                                                 Max = now.Main.TempMax,
-                                                 Min = now.Main.TempMin
+                                                 Max = now.Main.Temp,
+                                                 Min = now.Main.Temp
                                              });
                         break;
                     case 3:

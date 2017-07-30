@@ -8,7 +8,17 @@
     xmlns:models="using:Weather.UwpApp.Models"
     mc:Ignorable="d" Height="695.396" Width="882.313">
 
-    <Grid Background="White" Margin="0,0,-1.667,0" Height="690" VerticalAlignment="Top" HorizontalAlignment="Left" Width="884">
+    <Grid Margin="0,0,-1.667,0" Height="690" VerticalAlignment="Top" HorizontalAlignment="Left" Width="884">
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="#ccd5e2" Offset="0"/>
+                <GradientStop Color="#b0c5e5" Offset="0.25"/>
+                <GradientStop Color="#4f73af" Offset="0.5"/>
+                <GradientStop Color="#263f68" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Button Name="GetWeather" Content="Find out the weather" HorizontalAlignment="Left" Margin="41,580,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="Now" Content="Now" IsChecked="True" HorizontalAlignment="Left" Margin="41,387,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="Three" Content="The next three days" HorizontalAlignment="Left" Margin="40,418,0,0" VerticalAlignment="Top"/>
@@ -41,7 +51,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Button Content="Get History" Name="GetHistory" HorizontalAlignment="Left" Margin="640,13,0,0" VerticalAlignment="Top"/>
-        <ListView HorizontalAlignment="Left" Height="635" Margin="495,45,0,0" VerticalAlignment="Top" Width="389" ItemsSource="{x:Bind History}">
+        <ListView HorizontalAlignment="Left" Height="405" Margin="495,45,0,0" VerticalAlignment="Top" Width="389" ItemsSource="{x:Bind History}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:HistoryItem">
                     <Grid Margin="16">
@@ -59,6 +69,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-            <WebView HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="485"/>
+        <TextBlock Name="Info" HorizontalAlignment="Left" Margin="500,504,0,0" TextWrapping="Wrap" Text="Our company is very concerned about you and wants you to be always confident in the weather. Have not forgotten to take an umbrella or sunglasses. Therefore, we offer you to find out the exact weather, even a few days ahead. Enjoy your vacation or walks in spite of the weather." VerticalAlignment="Top" Height="176" Width="374"/>
+        <TextBlock HorizontalAlignment="Left" Margin="500,473,0,0" TextWrapping="Wrap" Text="Some information" VerticalAlignment="Top" Width="374" Height="26" FontWeight="Bold"/>
+        <Image Source="http://appvisor.ru/uploads/ios/2/12792/pogoda-live.png" HorizontalAlignment="Left" Height="100" Margin="10,13,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBlock FontSize="26px" HorizontalAlignment="Left" Margin="136,45,0,0" TextWrapping="Wrap" Text="Smile" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,118,0,0" TextWrapping="Wrap" Text="Whatever the weather is, the more important that you have in your heart...the weather is, the more important that you have in your heart..." VerticalAlignment="Top" Width="413"/>
     </Grid>
 </Page>

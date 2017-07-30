@@ -31,13 +31,13 @@
     <AppXManifest Include="D:\HW1\HM\HW1\Wheather\Weather.UwpApp\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-07-30T20:53:19.152</Modified>
+      <Modified>2017-07-30T21:43:49.781</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\HW1\HM\HW1\Wheather\Weather.UwpApp\bin\x86\Debug\Weather.UwpApp.exe">
       <PackagePath>entrypoint\Weather.UwpApp.exe</PackagePath>
-      <Modified>2017-07-30T20:53:18.590</Modified>
+      <Modified>2017-07-30T21:43:49.550</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\andrii.maslianko\.nuget\packages\Microsoft.CSharp\4.3.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -559,7 +559,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\HW1\HM\HW1\Wheather\Weather.UwpApp\bin\x86\Debug\Weather.UwpApp.xr.xml">
       <PackagePath>Weather.UwpApp.xr.xml</PackagePath>
-      <Modified>2017-07-30T20:53:18.421</Modified>
+      <Modified>2017-07-30T21:42:33.781</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -568,11 +568,11 @@
     <AppxPackagedFile Include="D:\HW1\HM\HW1\Wheather\Weather.UwpApp\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-07-30T20:53:18.982</Modified>
+      <Modified>2017-07-30T21:42:35.154</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\HW1\HM\HW1\Wheather\Weather.UwpApp\bin\x86\Debug\Core\Weather.UwpApp.exe">
       <PackagePath>Weather.UwpApp.exe</PackagePath>
-      <Modified>2017-07-30T20:53:19.145</Modified>
+      <Modified>2017-07-30T21:43:49.776</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

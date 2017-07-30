@@ -220,3 +220,4 @@ D:\HW1\HM\HW1\Wheather\Weather.UwpApp\obj\x86\Debug\qualifiers.txt
 D:\HW1\HM\HW1\Wheather\Weather.UwpApp\obj\x86\Debug\qualifiers.txt.intermediate
 D:\HW1\HM\HW1\Wheather\Weather.UwpApp\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 D:\HW1\HM\HW1\Wheather\Weather.UwpApp\obj\x86\Debug\ProjectArchitectures.txt
+D:\HW1\HM\HW1\Wheather\Weather.UwpApp\obj\x86\Debug\Weather.UwpApp.csprojResolveAssemblyReference.cache
