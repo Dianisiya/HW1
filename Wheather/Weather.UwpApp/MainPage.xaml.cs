@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+namespace Weather.UwpApp
+{
+    using System.Collections.ObjectModel;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
+    using Newtonsoft.Json;
+
+    using Weather.UwpApp.Models;
+
+    using Wheather.Models.Now;
+    using Wheather.Models.Seven;
+    using Wheather.Models.Three;
+
+    using Weather = Weather.UwpApp.Models.Weather;
+
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        public MainPage()
+        {
+            this.InitializeComponent();
+
+            this.GetWeather.Click += GetWeather_Click;
+
+            this.GetHistory.Click += GetHistory_Click;
+
+            this.InitCities();
+        }
+
+        private async void GetHistory_Click(object sender, RoutedEventArgs e)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = JsonConvert.DeserializeObject<IEnumerable<HistoryItem>>(await client.GetStringAsync("http://localhost:31657/Home/GetHistory"));
+                this.History.Clear();
+                resp.ToList().ForEach(this.History.Add);
+            }
+        }
+
+        private void InitCities()
+        {
+            this.CityCB.Items.Clear();
+
+            using (var httpClient = new HttpClient())
+            {
+                var value = httpClient.GetAsync("http://localhost:31657/Home/GetCities").Result;
+                var cities = JsonConvert.DeserializeObject<IEnumerable<string>>(value.Content.ReadAsStringAsync().Result);
+                foreach (var city in cities)
+                {
+                    this.CityCB.Items.Add(city);
+                }
+            }
+        }
+
+        public ObservableCollection<HistoryItem> History = new ObservableCollection<HistoryItem>();
+
+        public ObservableCollection<Weather> Weather { get; private set; } = new ObservableCollection<Weather>();
+
+        private async void GetWeather_Click(object sender, RoutedEventArgs e)
+        {
+            using (var client = new HttpClient())
+            {
+                var city = string.IsNullOrEmpty(this.CitiTB.Text) ? (string)this.CityCB.SelectedItem : this.CitiTB.Text;
+                switch (this.Now.IsChecked ?? false ? 1 : this.Three.IsChecked ?? false ? 3 : 7)
+                {
+                    case 1:
+                        var now = JsonConvert.DeserializeObject<Now>(
+                            await client.GetStringAsync("http://localhost:31657/Home/GetWeatherNowJson?city=" + city));
+                        this.Weather.Clear();
+                        this.Weather.Add(new Weather
+                                             {
+                                                 City = now.Name,
+                                                 Date = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(now.Dt).Date.ToString("D"),
+                                                 Icon = $"http://openweathermap.org/img/w/{now.Weather[0].Icon}.png",
+                                                 Max = now.Main.TempMax,
+                                                 Min = now.Main.TempMin
+                                             });
+                        break;
+                    case 3:
+                        var three = JsonConvert.DeserializeObject<Three>(
+                            await client.GetStringAsync("http://localhost:31657/Home/GetWeatherThreeDaysJson?city=" + city));
+                        this.Weather.Clear();
+                        three.List.Select(w => new Weather
+                                                   {
+                                                       Max = w.Temp.Max,
+                                                       Min = w.Temp.Min,
+                                                       Date = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt).Date.ToString("D"),
+                                                       Icon = $"http://openweathermap.org/img/w/{w.Weather[0].Icon}.png",
+                                                       City = three.City.Name
+                                                   }).ToList().ForEach(this.Weather.Add);
+                        break;
+                    case 7:
+                        var seven = JsonConvert.DeserializeObject<Seven>(
+                            await client.GetStringAsync("http://localhost:31657/Home/GetWeatherSevenDaysJson?city=" + city));
+                        this.Weather.Clear();
+                        seven.List.Select(w => new Weather
+                                                   {
+                                                       Max = w.Temp.Max,
+                                                       Min = w.Temp.Min,
+                                                       Date = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt).Date.ToString("D"),
+                                                       Icon = $"http://openweathermap.org/img/w/{w.Weather[0].Icon}.png",
+                                                       City = seven.City.Name
+                                                   }).ToList().ForEach(this.Weather.Add);
+                        break;
+                }
+            }
+        }
+    }
+}

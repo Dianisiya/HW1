@@ -1,0 +1,1 @@
+D:\HW1\HM\HW1\Wheather\Weather.UwpApp\Weather.UwpApp.csproj;x86

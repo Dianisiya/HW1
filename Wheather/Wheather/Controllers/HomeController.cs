@@ -49,6 +49,17 @@ namespace Wheather.Controllers
             return View(new HistoryModel{History = enumerable.Reverse()});
         }
 
+        public ActionResult GetHistory()
+        {
+            return Json(this._actionRepository.Get(),JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCities()
+        {
+            return this.Json(this._cityRepository.Get().Select(c => c.Name), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public void AddCity(string city)
         {
@@ -86,8 +97,7 @@ namespace Wheather.Controllers
             this._cityRepository.Save();
             this.actionLogger.AddAction($"User update cities. New cities : {cities.Aggregate((s, s1) => s + "," + s1)}");
         }
-
-        [HttpGet]
+        
         public ActionResult GetWeatherNow(string city)
         {
             var presentWeather = this._weatherService.GetPresentWeather(city);
@@ -107,6 +117,27 @@ namespace Wheather.Controllers
             var weatherSevenDays = this._weatherService.GetWeatherSevenDays(city);
             this.actionLogger.AddAction($"User view three days weather in {city}", weatherSevenDays.List.Select(w => new Weather { City = weatherSevenDays.City.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt), IconNumber = w.Weather[0].Icon }));
             return PartialView("SevenDays", weatherSevenDays);
+        }
+
+        public ActionResult GetWeatherNowJson(string city)
+        {
+            var presentWeather = this._weatherService.GetPresentWeather(city);
+            this.actionLogger.AddAction($"User view present weather in {city}", new[] { new Weather { City = presentWeather.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(presentWeather.Dt), IconNumber = presentWeather.Weather[0].Icon } });
+            return Json(presentWeather, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetWeatherThreeDaysJson(string city)
+        {
+            var weatherForThreeDays = this._weatherService.GetWeatherForThreeDays(city);
+            this.actionLogger.AddAction($"User view three days weather in {city}", weatherForThreeDays.List.Select(w => new Weather { City = weatherForThreeDays.City.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt), IconNumber = w.Weather[0].Icon }));
+            return Json(weatherForThreeDays, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetWeatherSevenDaysJson(string city)
+        {
+            var weatherSevenDays = this._weatherService.GetWeatherSevenDays(city);
+            this.actionLogger.AddAction($"User view three days weather in {city}", weatherSevenDays.List.Select(w => new Weather { City = weatherSevenDays.City.Name, DateTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(w.Dt), IconNumber = w.Weather[0].Icon }));
+            return Json(weatherSevenDays, JsonRequestBehavior.AllowGet);
         }
     }
 }
