@@ -13,9 +13,22 @@ using Wheather.Services.Interfaces;
 
 namespace Wheather.Controllers
 {
+    using System.Web.Http.Cors;
+    using System.Web.WebSockets;
+
     using Wheather.Models.Db;
     using Wheather.Services.Implementations;
 
+    public class AllowCrossSiteJsonAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Origin", "*");
+            base.OnActionExecuting(filterContext);
+        }
+    }
+
+    [AllowCrossSiteJson]
     public class HomeController : Controller
     {
         private readonly IWeatherService _weatherService;
@@ -51,7 +64,10 @@ namespace Wheather.Controllers
 
         public ActionResult GetHistory()
         {
-            return Json(this._actionRepository.Get(),JsonRequestBehavior.AllowGet);
+            var enumerable = this._actionRepository.Include("Result").Get();
+            enumerable.ToList().ForEach(a => a.Result.ToList().ForEach(w => w.Action = null));
+            return Json(enumerable.Select(
+                h => { return new { h.Description, h.Result, DateTime = h.DateTime.ToFileTimeUtc() }; }),JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

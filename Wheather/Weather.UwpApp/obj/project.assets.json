@@ -23884,10 +23884,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HW1\\HM\\HW1\\Wheather\\Weather.UwpApp\\Weather.UwpApp.csproj",
+      "projectUniqueName": "D:\\HW1\\HW1\\Wheather\\Weather.UwpApp\\Weather.UwpApp.csproj",
       "projectName": "Weather.UwpApp",
-      "projectPath": "D:\\HW1\\HM\\HW1\\Wheather\\Weather.UwpApp\\Weather.UwpApp.csproj",
-      "outputPath": "D:\\HW1\\HM\\HW1\\Wheather\\Weather.UwpApp\\obj\\",
+      "projectPath": "D:\\HW1\\HW1\\Wheather\\Weather.UwpApp\\Weather.UwpApp.csproj",
+      "outputPath": "D:\\HW1\\HW1\\Wheather\\Weather.UwpApp\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "uap10.0.10586"

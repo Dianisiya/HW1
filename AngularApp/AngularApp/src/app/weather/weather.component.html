@@ -1,0 +1,30 @@
+<div class="inputs">
+  <div class="city">
+    <label> Choose the city </label>
+    <select [(ngModel)]="city">
+    <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+  </select>
+  </div>
+  <div class="select">
+    <div>
+      <input name="days" type="radio" (change)="setTime(1)" checked="checked">
+      <label>One Day</label>
+    </div>
+    <div>
+      <input name="days" type="radio" (change)="setTime(3)">
+      <label>Three Day</label>
+    </div>
+    <div>
+      <input name="days" type="radio" (change)="setTime(7)">
+      <label>Seven Day</label>
+    </div>
+  </div>
+  <input type="button" (click)="getWeather()" value="Get Weather">
+</div>
+<div class="weather-list">
+  <div *ngFor="let weather of weatherList" class="weather">
+    <p>Date : {{weather.date.toDateString()}}</p>
+    <p>Temperature : {{weather.min}} - {{weather.max}}</p>
+    <img src="{{weather.icon}}"/>
+  </div>
+</div>

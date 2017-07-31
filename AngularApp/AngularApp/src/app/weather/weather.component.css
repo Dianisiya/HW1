@@ -1,0 +1,61 @@
+.inputs{
+  margin: 10% auto;
+
+  height: 200px;
+  width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inputs .city{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputs .city select{
+  border: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  outline: none;
+  padding: 3px;
+}
+
+.inputs .city select option{
+  background: rgba(255, 255, 255, 0.4)
+}
+
+.inputs .city label{
+  text-align: center;
+}
+
+.inputs .select{
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs input[type=button]{
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.inputs input[type=button]:hover{
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.weather-list{
+  max-height: 570px;
+  overflow-y: scroll;
+  overflow-x: none;
+  padding-right: 17px;
+  width: 100%;
+}
+
+.weather-list .weather{
+  margin: 0 auto;
+}
