@@ -13,6 +13,8 @@ using Wheather.Services.Interfaces;
 
 namespace Wheather.Controllers
 {
+    using System.Globalization;
+    using System.Threading;
     using System.Web.Http.Cors;
     using System.Web.WebSockets;
 
@@ -64,10 +66,11 @@ namespace Wheather.Controllers
 
         public ActionResult GetHistory()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var enumerable = this._actionRepository.Include("Result").Get();
             enumerable.ToList().ForEach(a => a.Result.ToList().ForEach(w => w.Action = null));
             return Json(enumerable.Select(
-                h => { return new { h.Description, h.Result, DateTime = h.DateTime.ToFileTimeUtc() }; }),JsonRequestBehavior.AllowGet);
+                h => { return new { h.Description, h.Result, DateTime = h.DateTime.ToString("D") }; }),JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

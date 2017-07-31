@@ -15,7 +15,7 @@ export class HistoryComponent {
       this.historyList = res.map(h => {
         return {
           description: h.Description,
-          date: new Date(h.DateTime),
+          date: h.DateTime,
           result: h.Result
         }
       });

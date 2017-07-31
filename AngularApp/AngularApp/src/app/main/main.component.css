@@ -1,0 +1,13 @@
+.main{
+  margin: 100px auto;
+  width: 600px;
+}
+
+.main .header{
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.main .info{
+  margin-bottom: 20px
+}

@@ -1,5 +1,5 @@
 .inputs{
-  margin: 10% auto;
+  margin: 100px auto 20px auto;
 
   height: 200px;
   width: 200px;
@@ -49,6 +49,7 @@
 }
 
 .weather-list{
+  height: 100%;
   max-height: 570px;
   overflow-y: scroll;
   overflow-x: none;
@@ -58,4 +59,9 @@
 
 .weather-list .weather{
   margin: 0 auto;
+  text-align: center;
+  width: 200px;
+  border-radius: 4px;
+  background-color: rgba(255,255,255, 0.1)
+
 }
