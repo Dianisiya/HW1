@@ -5,6 +5,7 @@ using Wheather.Models.Seven;
 using Wheather.Models.Three;
 using Wheather.Services.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Wheather.Services.Implementations
 {
@@ -17,39 +18,39 @@ namespace Wheather.Services.Implementations
             _requestService = requestService;
         }
 
-        public Now GetPresentWeather(string city)
+        public async Task<Now> GetPresentWeather(string city)
         {
             if((city == null) || (city == ""))
             {
                 throw new ArgumentException();
             }
-            return _requestService.ExecuteGetRequest<Now>($"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric");
+            return await _requestService.ExecuteGetRequest<Now>($"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric");
         }
 
-        public Three GetWeatherForThreeDays(string city)
+        public async Task<Three> GetWeatherForThreeDays(string city)
         {
             if ((city == null) || (city == ""))
             {
                 throw new ArgumentException();
             }
-            return _requestService.ExecuteGetRequest<Three>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=3");
+            return await _requestService.ExecuteGetRequest<Three>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=3");
         }
 
-        public Seven GetWeatherSevenDays(string city)
+        public async Task<Seven> GetWeatherSevenDays(string city)
         {
             if ((city == null) || (city == ""))
             {
                 throw new ArgumentException();
             }
-            return _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=7");
+            return await _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=7");
         }
-        public Seven GetWeather(string city, int days)
+        public async Task<Seven> GetWeather(string city, int days)
         {
             if ((city == null) || (city == "") || (days<1))
             {
                 throw new ArgumentException();
             }
-            return _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt={days}");
+            return await _requestService.ExecuteGetRequest<Seven>($"http://api.openweathermap.org/data/2.5/forecast/daily?q={city}&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt={days}");
         }
     }
 }

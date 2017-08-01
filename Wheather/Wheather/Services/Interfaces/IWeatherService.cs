@@ -1,4 +1,5 @@
-﻿using Wheather.Models.Now;
+﻿using System.Threading.Tasks;
+using Wheather.Models.Now;
 using Wheather.Models.Seven;
 using Wheather.Models.Three;
 
@@ -6,12 +7,12 @@ namespace Wheather.Services.Interfaces
 {
     public interface IWeatherService
     {
-        Now GetPresentWeather(string city);
+        Task<Now> GetPresentWeather(string city);
 
-        Three GetWeatherForThreeDays(string city);
+        Task<Three> GetWeatherForThreeDays(string city);
 
-        Seven GetWeatherSevenDays(string city);
+        Task<Seven> GetWeatherSevenDays(string city);
 
-        Seven GetWeather(string city, int days);
+        Task<Seven> GetWeather(string city, int days);
     }
 }

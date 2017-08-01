@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 using Wheather.Models.Db;
@@ -26,9 +27,9 @@ namespace Wheather.API
             return Json(db.Get(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetCities(int id)
+        public async Task<JsonResult> GetCities(int id)
         {
-            Models.Db.City cities = db.Get(id);
+            Models.Db.City cities =await db.Get(id);
             return Json(cities, JsonRequestBehavior.AllowGet);
         }
 
@@ -49,13 +50,13 @@ namespace Wheather.API
             }
         }
 
-        public void DeleteCity(int id)
+        public async Task DeleteCity(int id)
         {
-            Models.Db.City city = db.Get(id);
+            Models.Db.City city = await db.Get(id);
             if(city!=null)
             {
-                db.Delete(id);
-                db.Save();
+                await db.Delete(id);
+                await db.Save();
             }
         }
     }

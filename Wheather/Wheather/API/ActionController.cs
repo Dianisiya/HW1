@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
@@ -19,9 +20,9 @@ namespace Wheather.API
             this.db = db;
         }
 
-        public JsonResult GetHistory()
+        public async Task<JsonResult> GetHistory()
         {
-            var enumerable = this.db.Include("Result").Get();
+            var enumerable =await this.db.Include("Result").Get();
             foreach(var weather in enumerable.SelectMany(a => a.Result))
             {
                 weather.Action = null;

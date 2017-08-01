@@ -5,7 +5,7 @@
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using Wheather.Models.Db;
     using Wheather.Services.Interfaces;
 
@@ -29,18 +29,18 @@
             this.includes = includes;
         }
 
-        public void Add(TEntity entity)
+        public async Task Add(TEntity entity)
         {
             this.dbSet.Add(entity);
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
         }
 
-        public TEntity Get(TKey key)
+        public async Task<TEntity> Get(TKey key)
         {
-            return this.dbSet.Find(key);
+            return await this.dbSet.FindAsync(key);
         }
 
-        public IEnumerable<TEntity> Get()
+        public async Task<IEnumerable<TEntity>> Get()
         {
             var entities = this.dbSet.AsQueryable();
             if(this.includes != null)
@@ -48,23 +48,23 @@
             {
                 entities = entities.Include(include);
             }
-            return entities.ToArray();
+            return await entities.ToArrayAsync();
         }
 
-        public void Delete(TKey key)
+        public async Task Delete(TKey key)
         {
-            this.dbSet.Remove(this.Get(key));
+           this.dbSet.Remove(await this.Get(key));
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             this.context.Entry(entity).State = EntityState.Modified;
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
         }
 
         private readonly string[] includes;

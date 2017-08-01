@@ -5,7 +5,7 @@ namespace Wheather.Services.Implementations
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Threading.Tasks;
     using Action = Wheather.Models.Db.Action;
 
     public class DbActionLogger: IActionLogger
@@ -19,19 +19,19 @@ namespace Wheather.Services.Implementations
             this._actionsRepository = actionsRepository;
             this._weatherRepository = weatherRepository;
         }
-        public void AddAction(string action, IEnumerable<Weather> result = null)
+        public async Task AddAction(string action, IEnumerable<Weather> result = null)
         {
             var entity = new Action{DateTime = DateTime.Now, Description = action};
-            this._actionsRepository.Add(entity);
+            await this._actionsRepository.Add(entity);
             if (result != null)
             {
                 foreach (var weather in result)
                 {
                     weather.ActionId = entity.Id;
-                    this._weatherRepository.Add(weather);
+                    await this._weatherRepository.Add(weather);
                 }
             }
-            this._actionsRepository.Save();
+            await this._actionsRepository.Save();
         }
     }
 }

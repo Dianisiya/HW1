@@ -22,80 +22,80 @@ namespace Weather.Test
     public class WeatherServiceTests
     {
         [Test]
-        public void Correct_city_or_not_TestNow()
+        public async Task Correct_city_or_not_TestNow()
         {
             //Arrange
             var mock = new Mock<IRequestService>();
             mock.Setup(r => r.ExecuteGetRequest<Now>(It.IsAny<string>()))
-                .Returns<string>(str => new Now { Name = str });
+                .Returns<string>(str => Task.FromResult( new Now { Name = str }));
             var weather = new WeatherService(mock.Object);
 
             //Act
-            var res = weather.GetPresentWeather("Lviv");
+            var res = await weather.GetPresentWeather("Lviv");
 
             //Assert
             Assert.AreEqual("http://api.openweathermap.org/data/2.5/weather?q=Lviv&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric", res.Name);
         }
 
         [Test]
-        public void Correct_city_or_not_TestThree()
+        public async Task Correct_city_or_not_TestThree()
         {
             //Arrange
             var mock = new Mock<IRequestService>();
             mock.Setup(r => r.ExecuteGetRequest<Three>(It.IsAny<string>()))
-                .Returns<string>(str => new Three { City = new Wheather.Models.Three.City { Name = str } });
+                .Returns<string>(str => Task.FromResult(new Three { City = new Wheather.Models.Three.City { Name = str } }));
             var weather = new WeatherService(mock.Object);
 
             //Act
-            var res = weather.GetWeatherForThreeDays("Lviv");
+            var res = await weather.GetWeatherForThreeDays("Lviv");
 
             //Assert
             Assert.AreEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Lviv&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=3", res.City.Name);
         }
 
         [Test]
-        public void Correct_city_or_not1_TestThree()
+        public async Task Correct_city_or_not1_TestThree()
         {
             //Arrange
             var mock = new Mock<IRequestService>();
             mock.Setup(r => r.ExecuteGetRequest<Three>(It.IsAny<string>()))
-                .Returns<string>(str => new Three { City = new Wheather.Models.Three.City { Name = str } });
+                .Returns<string>(str => Task.FromResult(new Three { City = new Wheather.Models.Three.City { Name = str } }));
             var weather = new WeatherService(mock.Object);
 
             //Act
-            var res = weather.GetWeatherForThreeDays("Kyiv");
+            var res =await weather.GetWeatherForThreeDays("Kyiv");
 
             //Assert
             Assert.AreEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Kyiv&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=3", res.City.Name);
         }
 
         [Test]
-        public void Correct_city_or_not_TestSeven()
+        public async Task Correct_city_or_not_TestSeven()
         {
             //Arrange
             var mock = new Mock<IRequestService>();
             mock.Setup(r => r.ExecuteGetRequest<Seven>(It.IsAny<string>()))
-                .Returns<string>(str => new Seven { City = new Wheather.Models.Seven.City { Name = str } });
+                .Returns<string>(str =>Task.FromResult(new Seven { City = new Wheather.Models.Seven.City { Name = str } }));
             var weather = new WeatherService(mock.Object);
 
             //Act
-            var res = weather.GetWeatherSevenDays("Lviv");
+            var res =await weather.GetWeatherSevenDays("Lviv");
 
             //Assert
             Assert.AreEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Lviv&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=7", res.City.Name);
         }
 
         [Test]
-        public void Correct_city_or_not1_TestSeven()
+        public async Task Correct_city_or_not1_TestSeven()
         {
             //Arrange
             var mock = new Mock<IRequestService>();
             mock.Setup(r => r.ExecuteGetRequest<Seven>(It.IsAny<string>()))
-                .Returns<string>(str => new Seven { City = new Wheather.Models.Seven.City { Name = str } });
+                .Returns<string>(str =>Task.FromResult(new Seven { City = new Wheather.Models.Seven.City { Name = str } }));
             var weather = new WeatherService(mock.Object);
 
             //Act
-            var res = weather.GetWeatherSevenDays("Odessa");
+            var res =await weather.GetWeatherSevenDays("Odessa");
 
             //Assert
             Assert.AreEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Odessa&APPID=dc190a9f47022fdf0ead666741607ed0&units=metric&cnt=7", res.City.Name);

@@ -1,21 +1,22 @@
 ﻿namespace Wheather.Services.Interfaces
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IRepository<TEntity, TKey>
         where TEntity : class
     {
-        void Add(TEntity entity);
+        Task Add(TEntity entity);
 
-        TEntity Get(TKey key);
+        Task<TEntity> Get(TKey key);
 
-        IEnumerable<TEntity> Get();
+        Task<IEnumerable<TEntity>> Get();
 
-        void Delete(TKey key);
+        Task Delete(TKey key);
 
-        void Update(TEntity entity);
+        Task Update(TEntity entity);
 
-        void Save();
+        Task Save();
 
         IRepository<TEntity, TKey> Include(string include);
     }

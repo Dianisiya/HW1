@@ -20,13 +20,13 @@ namespace Weather.Test
     class WeatherServiceIntegrationTests
     {
         [Test]
-        public void The_same_or_not_city_and_time_Now()
+        public async Task The_same_or_not_city_and_time_Now()
         {
             //Arrange
             var weather = new WeatherService(new RequestService());
 
             //Act
-            var res = weather.GetPresentWeather("Lviv");
+            var res = await weather.GetPresentWeather("Lviv");
 
             //Assert
             Assert.AreEqual("Lviv", res.Name);
@@ -37,13 +37,13 @@ namespace Weather.Test
         }
 
         [Test]
-        public void The_same_or_not_city_and_time_Next_tree_days()
+        public async Task The_same_or_not_city_and_time_Next_tree_days()
         {
             //Arrange
             var weather = new WeatherService(new RequestService());
 
             //Act
-            var res = weather.GetWeatherForThreeDays("Lviv");
+            var res = await weather.GetWeatherForThreeDays("Lviv");
 
             //Assert
             Assert.AreEqual("Lviv", res.City.Name);
@@ -55,13 +55,13 @@ namespace Weather.Test
         }
 
         [Test]
-        public void The_same_or_not_city_and_time_Next_seven_days()
+        public async Task The_same_or_not_city_and_time_Next_seven_days()
         {
             //Arrange
             var weather = new WeatherService(new RequestService());
 
             //Act
-            var res = weather.GetWeatherSevenDays("Lviv");
+            var res = await weather.GetWeatherSevenDays("Lviv");
 
             //Assert
             Assert.AreEqual("Lviv", res.City.Name);
@@ -74,26 +74,26 @@ namespace Weather.Test
     
 
         [Test]
-        public void Count_of_day_Where_day_must_be_three()
+        public async Task Count_of_day_Where_day_must_be_three()
         {
             //Arrange
             var weather = new WeatherService(new RequestService());
 
             //Act
-            var res = weather.GetWeatherForThreeDays("Lviv");
+            var res = await weather.GetWeatherForThreeDays("Lviv");
 
             //Assert
             Assert.AreEqual(3, res.List.Length);
         }
 
         [Test]
-        public void Count_of_day_Where_day_must_be_seven()
+        public async Task Count_of_day_Where_day_must_be_seven()
         {
             //Arrange
             var weather = new WeatherService(new RequestService());
 
             //Act
-            var res = weather.GetWeatherSevenDays("Lviv");
+            var res = await weather.GetWeatherSevenDays("Lviv");
 
             //Assert
             Assert.AreEqual(7, res.List.Length);

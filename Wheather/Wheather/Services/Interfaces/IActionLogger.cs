@@ -3,9 +3,10 @@
 namespace Wheather.Services.Interfaces
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IActionLogger
     {
-        void AddAction(string action, IEnumerable<Weather> result = null);
+        Task AddAction(string action, IEnumerable<Weather> result = null);
     }
 }

@@ -8,6 +8,6 @@ namespace Wheather.Services.Interfaces
 {
     public interface IRequestService
     {
-        T ExecuteGetRequest<T>(string url);
+        Task<T> ExecuteGetRequest<T>(string url);
     }
 }
