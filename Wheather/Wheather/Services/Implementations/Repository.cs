@@ -71,6 +71,10 @@
 
         public IRepository<TEntity, TKey> Include(string include)
         {
+            if (string.IsNullOrEmpty(include))
+            {
+                throw new ArgumentException();
+            }
             return new Repository<TEntity, TKey>(this.context, this.includes.Union(new [] {include}).ToArray());
         }
     }

@@ -42,9 +42,19 @@ namespace Weather.UwpApp
         {
             using (var client = new HttpClient())
             {
-                var resp = JsonConvert.DeserializeObject<IEnumerable<HistoryItem>>(await client.GetStringAsync("http://localhost:31657/Home/GetHistory"));
-                this.History.Clear();
-                resp.ToList().ForEach(this.History.Add);
+                try
+                {
+                    var value = await client.GetStringAsync("http://localhost:31657/Home/GetHistory");
+                    var resp = JsonConvert.DeserializeObject<IEnumerable<HistoryItem>>(value);
+                    this.History.Clear();
+                    resp.ToList().ForEach(this.History.Add);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                    throw;
+                }
+                
             }
         }
 
@@ -54,13 +64,21 @@ namespace Weather.UwpApp
 
             using (var httpClient = new HttpClient())
             {
-                var value = await httpClient.GetAsync("http://localhost:31657/Home/GetCities");
-                var cities = JsonConvert.DeserializeObject<IEnumerable<string>>(await value.Content.ReadAsStringAsync());
-                foreach (var city in cities)
+                try
                 {
-                    this.CityCB.Items.Add(city);
+                    var value = await httpClient.GetAsync("http://localhost:31657/Home/GetCities");
+                    var cities = JsonConvert.DeserializeObject<IEnumerable<string>>(await value.Content.ReadAsStringAsync());
+                    foreach (var city in cities)
+                    {
+                        this.CityCB.Items.Add(city);
+                    }
+                    this.CityCB.SelectedItem = "Lviv";
                 }
-                this.CityCB.SelectedItem = "Lviv";
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
         }
 

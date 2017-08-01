@@ -21,7 +21,11 @@ namespace Wheather.Services.Implementations
                     var responce = await client.GetStringAsync(url);
                     res = JsonConvert.DeserializeObject<T>(responce);
                 }
-                catch(HttpRequestException exception) { }
+                catch (HttpRequestException exception)
+                {
+                    Console.WriteLine(exception);
+                    throw;
+                }
                 return res;
             }
         }
